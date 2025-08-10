@@ -2,6 +2,10 @@
 
 一个为SwiftUI视图添加长阴影效果的轻量级库，提供两种使用方式：视图修饰器（ViewModifier）和独立视图组件（View）。
 
+## 示例展示
+
+<img src="screenshot.png" alt="基础示例" style="width:300px;" />
+
 ## 功能特性
 
 - 🌈 支持自定义阴影颜色
@@ -129,10 +133,6 @@ struct LongShadowViewDemo_Previews: PreviewProvider {
 | color   | Color   | .gray    | 阴影颜色                 |
 | offset  | Int     | 5        | 阴影长度（偏移量）       |
 | isBlur  | Bool    | false    | 是否启用模糊渐变效果     |
-
-## 示例展示
-
-<img src="screenshot.png" alt="基础示例" style="width:300px;" />
 
 
 ## 性能建议

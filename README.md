@@ -128,11 +128,12 @@ struct LongShadowViewDemo_Previews: PreviewProvider {
 
 ### 参数说明
 
-| 参数    | 类型    | 默认值   | 描述                     |
-|---------|---------|----------|--------------------------|
-| color   | Color   | .gray    | 阴影颜色                 |
-| offset  | Int     | 5        | 阴影长度（偏移量）       |
-| isBlur  | Bool    | false    | 是否启用模糊渐变效果     |
+| 参数   | 类型  | 默认值       | 描述                 |
+| ------ | ----- | ------------ | -------------------- |
+| color  | Color | .gray        | 阴影颜色             |
+| offset | Int   | 5            | 阴影长度（偏移量）   |
+| isBlur | Bool  | false        | 是否启用模糊渐变效果 |
+| angle  | Angle | .degrees(45) | 阴影角度             |
 
 
 ## 性能建议

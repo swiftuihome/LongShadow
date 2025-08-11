@@ -35,11 +35,11 @@ public struct LongShadowExample: View {
                     .foregroundColor(.white)
                     .font(.largeTitle)
                     .fontWeight(.black)
-                    .longShadow(color: .purple)
+                    .longShadow(color: .purple, angle: .degrees(45))
             }
             .frame(width: 260, height: 80)
             .background(.cyan)
-            .longShadow(color: .purple, offset: 20)
+            .longShadow(color: .purple, offset: 20, angle: .degrees(45))
             .background(.brown)
         }
     }

@@ -60,11 +60,11 @@ struct LongShadowDemo: View {
                     .foregroundColor(.white)
                     .font(.largeTitle)
                     .fontWeight(.black)
-                    .longShadow(color: .purple)
+                    .longShadow(color: .purple, angle: .degrees(45))
             }
             .frame(width: 260, height: 80)
             .background(.cyan)
-            .longShadow(color: .purple, offset: 20)
+            .longShadow(color: .purple, offset: 20, angle: .degrees(45))
             .background(.brown)
         }
     }
@@ -102,9 +102,9 @@ struct LongShadowViewDemo: View {
             }
             .background(.green)
             
-            LongShadowView(color: .purple, offset: 20) {
+            LongShadowView(color: .purple, offset: 20, angle: .degrees(45)) {
                 VStack {
-                    LongShadowView(color: .purple) {
+                    LongShadowView(color: .purple, angle: .degrees(45)) {
                         Text("APPLE")
                             .foregroundColor(.white)
                             .font(.largeTitle)

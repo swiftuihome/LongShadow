@@ -32,9 +32,9 @@ public struct LongShadowViewExample: View {
             }
             .background(.green)
             
-            LongShadowView(color: .purple, offset: 20) {
+            LongShadowView(color: .purple, offset: 20, angle: .degrees(45)) {
                 VStack {
-                    LongShadowView(color: .purple) {
+                    LongShadowView(color: .purple, angle: .degrees(45)) {
                         Text("APPLE")
                             .foregroundColor(.white)
                             .font(.largeTitle)

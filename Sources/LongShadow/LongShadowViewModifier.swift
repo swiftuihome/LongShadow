@@ -8,10 +8,26 @@ import SwiftUI
 ///   - color: 阴影的颜色
 ///   - offset: 阴影的偏移量，决定阴影的长度（单位：点）
 ///   - isBlur: 是否启用模糊效果，使阴影逐渐变淡
-public struct LongShadow: ViewModifier {
+public struct LongShadowViewModifier: ViewModifier {
     let color: Color
     let offset: Int
+    let angle: Angle
     let isBlur: Bool
+    
+    private let compensation: CGFloat
+    
+    init(
+        color: Color = .primary,
+        offset: Int = 5,
+        angle: Angle = .degrees(45),
+        isBlur: Bool = false
+    ) {
+        self.color = color
+        self.offset = offset
+        self.angle = angle
+        self.isBlur = isBlur
+        self.compensation = 1.0 / max(abs(cos(angle.radians)), abs(sin(angle.radians)))
+    }
     
     public func body(content: Content) -> some View {
         // 缓存原始内容，避免重复构建
@@ -23,7 +39,10 @@ public struct LongShadow: ViewModifier {
                 ZStack {
                     ForEach(0..<offset, id: \.self) { index in
                         baseContent
-                            .offset(x: CGFloat(index + 1), y: CGFloat(index + 1))
+                            .offset(
+                                x: CGFloat(index + 1) * compensation * cos(angle.radians),
+                                y: CGFloat(index + 1) * compensation * sin(angle.radians)
+                            )
                             .opacity(isBlur ? (1 - Double(index) / Double(offset)) : 1)
                     }
                 }
@@ -40,9 +59,10 @@ public extension View {
     func longShadow(
         color: Color = .gray,
         offset: Int = 5,
+        angle: Angle = .degrees(45),
         isBlur: Bool = false
     ) -> some View {
-        self.modifier(LongShadow(color: color, offset: offset, isBlur: isBlur))
+        self.modifier(LongShadowViewModifier(color: color, offset: offset, angle: angle, isBlur: isBlur))
     }
 }
 
@@ -54,11 +74,20 @@ public extension View {
 public struct LongShadowView<Content: View>: View {
     let color: Color
     let offset: Int
+    let angle: Angle
+    private let compensation: CGFloat
     let content: () -> Content
     
-    public init(color: Color = .gray, offset: Int = 5, @ViewBuilder content: @escaping () -> Content) {
+    public init(
+        color: Color = .gray,
+        offset: Int = 5,
+        angle: Angle = .degrees(45),
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self.color = color
         self.offset = offset
+        self.angle = angle
+        self.compensation = 1.0 / max(abs(cos(angle.radians)), abs(sin(angle.radians)))
         self.content = content
     }
     
@@ -69,7 +98,10 @@ public struct LongShadowView<Content: View>: View {
                 ZStack {
                     ForEach(0..<offset, id: \.self) { index in
                         content()
-                            .offset(x: CGFloat(index + 1), y: CGFloat(index + 1))
+                            .offset(
+                                x: CGFloat(index + 1) * compensation * cos(angle.radians),
+                                y: CGFloat(index + 1) * compensation * sin(angle.radians)
+                            )
                     }
                 }
             )
